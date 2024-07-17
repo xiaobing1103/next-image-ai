@@ -10,7 +10,8 @@ const nextConfig = {
         destination: `https://ai1foo.com/api/:path*`
       }
     ]
-  }
+  },
+  reactStrictMode: false
 }
 
 export default nextConfig

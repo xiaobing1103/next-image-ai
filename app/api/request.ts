@@ -1,4 +1,4 @@
-import queryString from "query-string";
+import queryString from 'query-string'
 
 type Method = 'GET' | 'POST' | 'PUT' | 'DELETE' | 'PATCH'
 
@@ -50,6 +50,7 @@ class Request {
         requestPayload = JSON.stringify(params)
       }
     }
+
     return {
       url,
       options: {
@@ -60,7 +61,6 @@ class Request {
       }
     }
   }
-
   /**
    * 响应拦截器
    */
@@ -86,8 +86,10 @@ class Request {
   }
 
   async httpFactory<T>({ url = '', params = {}, method }: Props): Promise<T> {
+    console.log(process.env.NEXT_PUBLIC_BASEURL)
     const req = this.interceptorsRequest({
-      url: process.env.NEXT_PUBLIC_BASEURL + url,
+      // url: process.env.NEXT_PUBLIC_BASEURL + url,
+      url: url,
       method,
       params: params.params,
       cacheTime: params.cacheTime
