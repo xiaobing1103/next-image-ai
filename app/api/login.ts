@@ -64,3 +64,8 @@ export function sendSmsCode(phone: number) {
     params: { phone },
   });
 }
+
+// AI扩图
+export const extendbytxt = (params: any) => {
+  return request.post("/api/v1/img/extendbytxt", params);
+};

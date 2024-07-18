@@ -1,4 +1,4 @@
-'use client'
+"use client";
 import {
   Navbar as NextUINavbar,
   NavbarContent,
@@ -6,32 +6,46 @@ import {
   NavbarMenuToggle,
   NavbarBrand,
   NavbarItem,
-  NavbarMenuItem
-} from '@nextui-org/navbar'
-import { Button } from '@nextui-org/button'
-import { Kbd } from '@nextui-org/kbd'
-import { Link } from '@nextui-org/link'
-import { Input } from '@nextui-org/input'
+  NavbarMenuItem,
+} from "@nextui-org/navbar";
+import { Button } from "@nextui-org/button";
+import { Kbd } from "@nextui-org/kbd";
+import { Link } from "@nextui-org/link";
+import { Input } from "@nextui-org/input";
 
-import { link as linkStyles } from '@nextui-org/theme'
-import NextLink from 'next/link'
-import clsx from 'clsx'
+import { link as linkStyles } from "@nextui-org/theme";
+import NextLink from "next/link";
+import clsx from "clsx";
 
-import { siteConfig } from '@/config/site'
-import { ThemeSwitch } from '@/components/theme-switch'
-import { TwitterIcon, GithubIcon, DiscordIcon, SearchIcon, Logo } from '@/components/icons'
-import { useLoginModal } from '@/app/contexts/LoginModalContext'
+import { siteConfig } from "@/config/site";
+import { ThemeSwitch } from "@/components/theme-switch";
+import {
+  TwitterIcon,
+  GithubIcon,
+  DiscordIcon,
+  SearchIcon,
+  Logo,
+} from "@/components/icons";
+import { useLoginModal } from "@/app/contexts/LoginModalContext";
+import { userStore } from "@/app/store";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+  Image,
+} from "@nextui-org/react";
+import UserInfoCom from "./LoginCommon/UserInfoCom";
 
 export const Navbar = () => {
   const searchInput = (
     <Input
       aria-label="Search"
       classNames={{
-        inputWrapper: 'bg-default-100',
-        input: 'text-sm'
+        inputWrapper: "bg-default-100",
+        input: "text-sm",
       }}
       endContent={
-        <Kbd className="hidden lg:inline-block" keys={['command']}>
+        <Kbd className="hidden lg:inline-block" keys={["command"]}>
           K
         </Kbd>
       }
@@ -42,9 +56,10 @@ export const Navbar = () => {
       }
       type="search"
     />
-  )
-  const { openLoginModal } = useLoginModal()
+  );
+  const { openLoginModal } = useLoginModal();
 
+  const { user_info } = userStore();
   return (
     <NextUINavbar maxWidth="xl" position="sticky">
       <NavbarContent className="basis-1/5 sm:basis-full" justify="start">
@@ -59,8 +74,8 @@ export const Navbar = () => {
             <NavbarItem key={item.href}>
               <NextLink
                 className={clsx(
-                  linkStyles({ color: 'foreground' }),
-                  'data-[active=true]:text-primary data-[active=true]:font-medium'
+                  linkStyles({ color: "foreground" }),
+                  "data-[active=true]:text-primary data-[active=true]:font-medium"
                 )}
                 color="foreground"
                 href={item.href}
@@ -72,9 +87,12 @@ export const Navbar = () => {
         </ul>
       </NavbarContent>
 
-      <NavbarContent className="hidden sm:flex basis-1/5 sm:basis-full" justify="end">
+      <NavbarContent
+        className="hidden sm:flex basis-1/5 sm:basis-full"
+        justify="end"
+      >
         <NavbarItem className="hidden sm:flex gap-2">
-          <Link isExternal aria-label="Twitter" href={siteConfig.links.twitter}>
+          {/* <Link isExternal aria-label="Twitter" href={siteConfig.links.twitter}>
             <TwitterIcon className="text-default-500" />
           </Link>
           <Link isExternal aria-label="Discord" href={siteConfig.links.discord}>
@@ -82,23 +100,35 @@ export const Navbar = () => {
           </Link>
           <Link isExternal aria-label="Github" href={siteConfig.links.github}>
             <GithubIcon className="text-default-500" />
-          </Link>
+          </Link> */}
           <ThemeSwitch />
         </NavbarItem>
-        <NavbarItem className="hidden lg:flex">{searchInput}</NavbarItem>
+        {/* <NavbarItem className="hidden lg:flex">{searchInput}</NavbarItem> */}
         <NavbarItem className="hidden md:flex">
-          <Button
-            // isExternal
-            // as={Link}
-            // className="text-sm font-normal text-default-600 "
-            color="primary"
-            href={siteConfig.links.sponsor}
-            // startContent={<HeartFilledIcon className="text-danger" />}
-            variant="flat"
-            onClick={openLoginModal}
-          >
-            登录/注册
-          </Button>
+          {user_info ? (
+            <>
+              <Popover placement="bottom">
+                <PopoverTrigger>
+                  <Image
+                    className="mx-auto  rounded-full w-10 h-10"
+                    src={user_info.avatar}
+                  />
+                </PopoverTrigger>
+                <PopoverContent>
+                  <UserInfoCom />
+                </PopoverContent>
+              </Popover>
+            </>
+          ) : (
+            <Button
+              color="primary"
+              href={siteConfig.links.sponsor}
+              variant="flat"
+              onClick={openLoginModal}
+            >
+              登录/注册
+            </Button>
+          )}
         </NavbarItem>
       </NavbarContent>
 
@@ -118,10 +148,10 @@ export const Navbar = () => {
               <Link
                 color={
                   index === 2
-                    ? 'primary'
+                    ? "primary"
                     : index === siteConfig.navMenuItems.length - 1
-                    ? 'danger'
-                    : 'foreground'
+                    ? "danger"
+                    : "foreground"
                 }
                 href="#"
                 size="lg"
@@ -133,5 +163,5 @@ export const Navbar = () => {
         </div>
       </NavbarMenu>
     </NextUINavbar>
-  )
-}
+  );
+};

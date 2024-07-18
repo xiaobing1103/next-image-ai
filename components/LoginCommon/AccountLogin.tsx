@@ -45,6 +45,7 @@ export default function Accountlogin({
 
   const onLogin = async () => {
     // 账号密码登录
+    debugger;
     if (params.type == "login") {
       if (!params.account) {
         console.log(params);
@@ -156,13 +157,15 @@ export default function Accountlogin({
   return (
     <div>
       <Input
+        className="mt-5 mb-5"
         endContent={
           <MailIcon className="text-2xl text-default-400 pointer-events-none flex-shrink-0" />
         }
-        className=" mt-5 mb-5"
-        label="用户名"
+        label="用户名/邮箱/手机"
         placeholder="请输入你的用户名"
+        value={params.account}
         variant="bordered"
+        onChange={(e) => setParams({ ...params, account: e.target.value })}
       />
       {params.type !== "msgCode" && (
         <Input
@@ -172,7 +175,9 @@ export default function Accountlogin({
           label="密码"
           placeholder="请输入密码"
           type="password"
+          value={params.password}
           variant="bordered"
+          onChange={(e) => setParams({ ...params, password: e.target.value })}
         />
       )}
 
@@ -198,7 +203,7 @@ export default function Accountlogin({
           <Link
             className=" px-2 box-border  w-1/3 cursor-pointer"
             tabIndex={0}
-            onClick={sendCode}
+            onPress={sendCode}
           >
             {timerActive ? `${veifytime}秒` : "获取验证码"}
           </Link>
@@ -210,11 +215,11 @@ export default function Accountlogin({
           {params.type !== "login" ? (
             <>
               {isShowPassCode && (
-                <div>
+                <div className=" w-full  my-3">
                   <SliderCaptcha
                     actionRef={actionRef}
                     bgSize={{
-                      width: 260,
+                      width: 392,
                     }}
                     errorHoldDuration={1000}
                     mode="slider"
@@ -227,7 +232,7 @@ export default function Accountlogin({
                     onVerify={(data) => {
                       console.log(data);
                       // 默认背景图宽度 320 减去默认拼图宽度 60 所以滑轨宽度是 260
-                      if (data.x === 200) {
+                      if (data.x === 332) {
                         return Promise.resolve().then(() => {
                           setIsPassCode(true);
                           toast.info("正在获取验证码,清稍等...");
@@ -266,10 +271,11 @@ export default function Accountlogin({
       {type === "register" && (
         <div>
           <Input
-            placeholder="邀请码（可空）"
-            // prefix={<GiftOutlined />}
-            // size="large"
+            className="mt-5 mb-5"
+            label="邀请码（可空）"
+            placeholder="请填写邀请码"
             value={params.invite_code}
+            variant="bordered"
             onChange={(e) =>
               setParams({ ...params, invite_code: e.target.value })
             }

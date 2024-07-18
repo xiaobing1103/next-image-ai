@@ -1,25 +1,32 @@
-// contexts/LoginModalContext.js
-import React, { createContext, ReactNode, useContext, useState } from 'react'
+"use client";
+
+import React, { createContext, ReactNode, useContext, useState } from "react";
+
 interface LoginModalContextType {
-  isLoginModalOpen: boolean
-  openLoginModal: () => void
-  closeLoginModal: () => void
+  isLoginModalOpen: boolean;
+  openLoginModal: () => void;
+  closeLoginModal: () => void;
 }
 
-const LoginModalContext = createContext<LoginModalContextType | undefined>(undefined)
+const LoginModalContext = createContext<LoginModalContextType | undefined>(
+  undefined
+);
 
 interface LoginModalProviderProps {
-  children: ReactNode
+  children: ReactNode;
 }
-export const LoginModalProvider: React.FC<LoginModalProviderProps> = ({ children }) => {
-  const [isLoginModalOpen, setLoginModalOpen] = useState(false)
+
+export const LoginModalProvider: React.FC<LoginModalProviderProps> = ({
+  children,
+}) => {
+  const [isLoginModalOpen, setLoginModalOpen] = useState(false);
 
   const openLoginModal = () => {
-    setLoginModalOpen(true)
-  }
+    setLoginModalOpen(true);
+  };
   const closeLoginModal = () => {
-    setLoginModalOpen(false)
-  }
+    setLoginModalOpen(false);
+  };
 
   return (
     <LoginModalContext.Provider
@@ -27,13 +34,14 @@ export const LoginModalProvider: React.FC<LoginModalProviderProps> = ({ children
     >
       {children}
     </LoginModalContext.Provider>
-  )
-}
+  );
+};
+
 export const useLoginModal = (): LoginModalContextType => {
-  const context = useContext(LoginModalContext)
+  const context = useContext(LoginModalContext);
 
   if (!context) {
-    throw new Error('useLoginModal must be used within a LoginModalProvider')
+    throw new Error("useLoginModal must be used within a LoginModalProvider");
   }
-  return context
-}
+  return context;
+};

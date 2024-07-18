@@ -1,20 +1,21 @@
-'use client'
+"use client";
 
-import * as React from 'react'
-import { NextUIProvider } from '@nextui-org/system'
-import { useRouter } from 'next/navigation'
-import { ThemeProvider as NextThemesProvider } from 'next-themes'
-import { ThemeProviderProps } from 'next-themes/dist/types'
-import { LoginModalProvider } from './contexts/LoginModalContext'
-import LoginModal from '@/components/LoginCommon/LoginModal/LoginModal'
-
+import * as React from "react";
+import { NextUIProvider } from "@nextui-org/system";
+import { useRouter } from "next/navigation";
+import { ThemeProvider as NextThemesProvider } from "next-themes";
+import { ThemeProviderProps } from "next-themes/dist/types";
+import { LoginModalProvider } from "./contexts/LoginModalContext";
+import LoginModal from "@/components/LoginCommon/LoginModal/LoginModal";
+import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer } from "react-toastify";
 export interface ProvidersProps {
-  children: React.ReactNode
-  themeProps?: ThemeProviderProps
+  children: React.ReactNode;
+  themeProps?: ThemeProviderProps;
 }
 
 export function Providers({ children, themeProps }: ProvidersProps) {
-  const router = useRouter()
+  const router = useRouter();
 
   return (
     <NextUIProvider navigate={router.push}>
@@ -22,8 +23,9 @@ export function Providers({ children, themeProps }: ProvidersProps) {
         <LoginModalProvider>
           <LoginModal />
           {children}
+          <ToastContainer />
         </LoginModalProvider>
       </NextThemesProvider>
     </NextUIProvider>
-  )
+  );
 }

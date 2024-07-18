@@ -1,3 +1,4 @@
+"use client";
 import React, { useEffect } from "react";
 import {
   Modal,
@@ -26,10 +27,6 @@ export default function LoginModal() {
     }
   }, [isLoginModalOpen]);
 
-  function onLogin(e: ProgressEvent): void {
-    throw new Error("Function not implemented.");
-  }
-
   return (
     <div>
       <Modal isOpen={isOpen} onClose={closeLoginModal} placement="top-center">
@@ -47,7 +44,7 @@ export default function LoginModal() {
                       <Accountlogin type="login" onClose={onClose} />
                     </Tab>
                     <Tab key="register" title="注册账户">
-                      注册账户注册账户注册账户注册账户注册账户
+                      <Accountlogin type="register" onClose={onClose} />
                     </Tab>
                   </Tabs>
                 </div>

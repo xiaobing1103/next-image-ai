@@ -1,15 +1,12 @@
-"use client";
-import FloatingWidget from "@/components/FloatingWidget";
-import Footer from "@/components/Footet";
-import Modal from "@/components/Modal";
+import { Link } from "@nextui-org/link";
 import Head from "next/head";
-import Image from "next/image";
-import { useState } from "react";
+import Footer from "@/components/Footet";
+import FloatingWidget from "@/components/FloatingWidget";
+import MyUploady from "@/components/Upload";
+import ClientOnly from "@/components/ClientOnly";
+import IconsTem from "@/components/IconsTem";
 
 export default function Home() {
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const openModal = () => setIsModalOpen(true);
-  const closeModal = () => setIsModalOpen(false);
   const createData = [
     {
       title: "放大原理是什么？",
@@ -60,89 +57,31 @@ export default function Home() {
 
   return (
     <>
-      <div className=" min-h-screen">
+      <div className="min-h-screen">
         <Head>
           <title>AI 人工智能图片放大</title>
-          <link href="/favicon.ico" rel="icon" />
+          <Link href="/favicon.ico" rel="icon" />
         </Head>
         <div className="max-w-4xl mx-auto p-6">
-          {/* <div className="flex justify-between items-center mb-8">
-            <h1 className="text-3xl font-bold">AI人工智能图片放大</h1>
-            <button
-              className="px-4 py-2 bg-blue-500 text-white rounded"
-              onClick={() => setIsModalOpen(true)}
-            >
-              登录 / 注册
-            </button>
-          </div> */}
-
-          <div className=" p-6 rounded shadow-md mb-8">
-            <div className="border-dashed border-2 border-gray-300 p-6 text-center">
-              <button className="px-4 py-2 bg-green-500 text-white rounded">
-                选择图片
-              </button>
-              <p className="text-gray-500 mt-2">
-                想要放大图片更快、更多、更稳定？
-                <a className="text-blue-500" href="#21321">
-                  登录
-                </a>
-              </p>
-            </div>
+          <div className="p-6 rounded shadow-md dark:shadow-foreground-500 mb-8 dark:text-black">
+            <ClientOnly>
+              <MyUploady>
+                <p className="text-gray-500 mt-2">
+                  想要放大图片更快、更多、更稳定？
+                  <Link className="text-blue-500" href="#21321">
+                    登录
+                  </Link>
+                </p>
+              </MyUploady>
+            </ClientOnly>
           </div>
-
-          <div className=" p-6 rounded shadow-md mb-8">
+          <div className="p-6 rounded shadow-md dark:shadow-foreground-500 mb-8">
             <h2 className="text-2xl font-bold mb-4">常见问题</h2>
-
-            <div className="flex justify-around items-center mb-8">
-              <div className="text-center">
-                <Image
-                  alt="Windows 64-bit"
-                  className="mx-auto mb-2"
-                  height={50}
-                  src="https://img.icons8.com/ios/50/000000/windows8.png"
-                  width={50}
-                />
-                <a className="text-blue-500" href="分我排风口我怕">
-                  Windows 64-bit
-                </a>
+            <ClientOnly>
+              <div className="flex justify-around items-center mb-8">
+                <IconsTem />
               </div>
-              <div className="text-center">
-                <Image
-                  alt="Windows 32-bit"
-                  className="mx-auto mb-2"
-                  height={50}
-                  src="https://img.icons8.com/ios/50/000000/windows8.png"
-                  width={50}
-                />
-                <a className="text-blue-500" href="分我排风口我怕">
-                  Windows 32-bit
-                </a>
-              </div>
-              <div className="text-center">
-                <Image
-                  alt="Mac App"
-                  className="mx-auto mb-2"
-                  height={50}
-                  src="https://img.icons8.com/ios/50/000000/mac-os.png"
-                  width={50}
-                />
-                <a className="text-blue-500" href="分我排风口我怕">
-                  Mac App
-                </a>
-              </div>
-              <div className="text-center">
-                <Image
-                  alt="Android App"
-                  className="mx-auto mb-2"
-                  height={50}
-                  src="https://img.icons8.com/ios/50/000000/android.png"
-                  width={50}
-                />
-                <a className="text-blue-500" href="21321321">
-                  Android App
-                </a>
-              </div>
-            </div>
+            </ClientOnly>
             {createData.map((items, index) => {
               return (
                 <div className="mb-4" key={index}>
@@ -150,9 +89,9 @@ export default function Home() {
                   <p className="text-gray-700">
                     {items.desc}
                     {items.imageSrc && (
-                      <a href="#" className="text-blue-500">
+                      <Link className="text-blue-500" href="#">
                         查看示例图片
-                      </a>
+                      </Link>
                     )}
                   </p>
                 </div>
@@ -161,29 +100,8 @@ export default function Home() {
           </div>
           <Footer />
           <FloatingWidget />
-          {/* <div className="bg-white p-6 rounded shadow-md mb-8 text-center">
-            <h2 className="text-xl font-semibold mb-4">Bigjpg 小程序</h2>
-            <img
-              src="https://via.placeholder.com/150"
-              alt="QR Code"
-              className="mx-auto mb-4"
-            />
-            <p className="text-gray-700">
-              扫码使用 Bigjpg 人工智能定期推送超高清美图影纸最新黑科技新功能
-            </p>
-          </div> */}
         </div>
       </div>
-      <Modal
-        isOpen={isModalOpen}
-        onConfirm={() => {
-          console.log(1231);
-        }}
-        onClose={closeModal}
-        title="这是一个弹窗"
-      >
-        fidsojfods
-      </Modal>
     </>
   );
 }
