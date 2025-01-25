@@ -1,53 +1,50 @@
-# Next.js & NextUI Template
+# Welcome to your Expo app 👋
 
-This is a template for creating applications using Next.js 14 (app directory) and NextUI (v2).
+This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
 
-[Try it on CodeSandbox](https://githubbox.com/nextui-org/next-app-template)
+## Get started
 
-## Technologies Used
+1. Install dependencies
 
-- [Next.js 14](https://nextjs.org/docs/getting-started)
-- [NextUI v2](https://nextui.org/)
-- [Tailwind CSS](https://tailwindcss.com/)
-- [Tailwind Variants](https://tailwind-variants.org)
-- [TypeScript](https://www.typescriptlang.org/)
-- [Framer Motion](https://www.framer.com/motion/)
-- [next-themes](https://github.com/pacocoursey/next-themes)
+   ```bash
+   npm install
+   ```
 
-## How to Use
+2. Start the app
 
-### Use the template with create-next-app
+   ```bash
+    npx expo start
+   ```
 
-To create a new project based on this template using `create-next-app`, run the following command:
+In the output, you'll find options to open the app in a
 
-```bash
-npx create-next-app -e https://github.com/nextui-org/next-app-template
-```
+- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
+- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
+- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
+- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
 
-### Install dependencies
+You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
 
-You can use one of them `npm`, `yarn`, `pnpm`, `bun`, Example using `npm`:
+## Get a fresh project
 
-```bash
-npm install
-```
-
-### Run the development server
+When you're ready, run:
 
 ```bash
-npm run dev
+npm run reset-project
 ```
 
-### Setup pnpm (optional)
+This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
 
-If you are using `pnpm`, you need to add the following code to your `.npmrc` file:
+## Learn more
 
-```bash
-public-hoist-pattern[]=*@nextui-org/*
-```
+To learn more about developing your project with Expo, look at the following resources:
 
-After modifying the `.npmrc` file, you need to run `pnpm install` again to ensure that the dependencies are installed correctly.
+- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
+- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
 
-## License
+## Join the community
 
-Licensed under the [MIT license](https://github.com/nextui-org/next-app-template/blob/main/LICENSE).
+Join our community of developers creating universal apps.
+
+- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
+- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
